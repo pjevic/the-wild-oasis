@@ -1,5 +1,8 @@
 /** @format */
 
+import Logo from "./Logo";
+import MainNav from "./MainNav";
+
 import styled from "styled-components";
 
 const StyledSidebar = styled.aside`
@@ -8,10 +11,18 @@ const StyledSidebar = styled.aside`
   border: 1px solid var(--color-gray-100);
 
   grid-row: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
 `;
 
 function Sidebar() {
-  return <StyledSidebar>SIDEBAR</StyledSidebar>;
+  return (
+    <StyledSidebar>
+      <Logo />
+      <MainNav />
+    </StyledSidebar>
+  );
 }
 
 export default Sidebar;
