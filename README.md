@@ -8,15 +8,35 @@ Here are the main tools and frameworks employed in this project:
 
 <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
 
-<img src="./img/React.png" alt="React" width="150px">
-<img src="./img/Styled-Components.png" alt="Styled Components" width="150px">
-<img src="./img/React-Router.png" alt="React Router" width="150px">
-<img src="./img/Supabase.png" alt="Supabase" width="150px">
-<img src="./img/React-Query.png" alt="React Query" width="150px">
-<img src="./img/React-Icons.png" alt="React Icons" width="150px">
-<img src="./img/Midjourney.png" alt="Midjourney" width="150px">
+<img src="./img/Vite.jpeg" alt="Vite" height="150px">
+<img src="./img/ESLint.png" alt="ESLint" height="150px">
+<img src="./img/React.png" alt="React" height="150px">
+<img src="./img/Styled-Components.png" alt="Styled Components" height="150px">
+<img src="./img/React-Router.png" alt="React Router" height="150px">
+<img src="./img/Supabase.png" alt="Supabase" height="150px">
+<img src="./img/React-Query.png" alt="React Query" height="150px">
+<img src="./img/TanStack-Query.jpeg" alt="TanStack Query" height="150px">
+<img src="./img/React-Icons.png" alt="React Icons" height="150px">
+<img src="./img/Midjourney.png" alt="Midjourney" height="150px">
 
 </div>
+
+---
+
+## Why Supabase?
+
+- **Supabase** is an open-source alternative to Firebase, providing a robust backend as a service (BaaS). It simplifies backend development and offers features such as:
+
+  - **Instant APIs**: Automatically generates RESTful APIs based on your database schema.
+  - **Authentication**: Includes user authentication with multiple providers (e.g., email, Google, GitHub).
+  - **Real-time updates**: Enables real-time synchronization between the client and the database.
+  - **Scalable database**: Built on PostgreSQL, ensuring performance and scalability.
+  - **File storage**: Provides secure file storage integrated with your backend.
+  - **Ease of use**: Offers a straightforward setup and intuitive dashboard.
+
+- Supabase is ideal for projects requiring a powerful and flexible backend with minimal configuration, making it a perfect fit for modern web applications.
+
+---
 
 ## Why React Query?
 
@@ -29,4 +49,4 @@ Here are the main tools and frameworks employed in this project:
   - **Offline support**: Enables functionality when the user is offline.
 - React Query is essential because **remote state** (data fetched from a server) is fundamentally different from **UI state** (local component data). Managing these two types of state separately and efficiently improves app performance and maintainability.
 
-<img src="./img/TanStack-Query.jpeg" alt="Midjourney" width="150px">
+---
