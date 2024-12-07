@@ -8,14 +8,14 @@ Here are the main tools and frameworks employed in this project:
 
 <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
 
-<img src="./img/Vite.jpeg" alt="Vite" height="150px">
+<img src="./img/Vite.png" alt="Vite" height="150px">
 <img src="./img/ESLint.png" alt="ESLint" height="150px">
 <img src="./img/React.png" alt="React" height="150px">
-<img src="./img/Styled-Components.png" alt="Styled Components" height="150px">
+<img src="./img/Styled-Component.png" alt="Styled Components" height="150px">
 <img src="./img/React-Router.png" alt="React Router" height="150px">
 <img src="./img/Supabase.png" alt="Supabase" height="150px">
 <img src="./img/React-Query.png" alt="React Query" height="150px">
-<img src="./img/TanStack-Query.jpeg" alt="TanStack Query" height="150px">
+<img src="./img/TanStack-Query.png" alt="TanStack Query" height="150px">
 <img src="./img/React-Icons.png" alt="React Icons" height="150px">
 <img src="./img/Midjourney.png" alt="Midjourney" height="150px">
 
