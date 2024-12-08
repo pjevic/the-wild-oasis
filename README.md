@@ -6,41 +6,17 @@
 
 Here are the main tools and frameworks employed in this project:
 
-<div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;">
-  <a href="https://vitejs.dev/" target="_blank" style="border-radius: 8px; overflow: hidden;">
-    <img src="./img/Vite.png" alt="Vite" height="120px">
-  </a>
-  <a href="https://eslint.org/" target="_blank" style="border-radius: 8px; overflow: hidden;">
-    <img src="./img/ESLint.png" alt="ESLint" height="120px">
-  </a>
-  <a href="https://react.dev/" target="_blank" style="border-radius: 8px; overflow: hidden;">
-    <img src="./img/React.png" alt="React" height="120px">
-  </a>
-  <a href="https://styled-components.com/" target="_blank" style="border-radius: 8px; overflow: hidden;">
-    <img src="./img/Styled-Component.png" alt="Styled Components" height="120px">
-  </a>
-  <a href="https://reactrouter.com/" target="_blank" style="border-radius: 8px; overflow: hidden;">
-    <img src="./img/React-Router.png" alt="React Router" height="120px">
-  </a>
-  <a href="https://supabase.com/" target="_blank" style="border-radius: 8px; overflow: hidden;">
-    <img src="./img/Supabase.png" alt="Supabase" height="120px">
-  </a>
-  <a href="https://tanstack.com/query/v4" target="_blank" style="border-radius: 8px; overflow: hidden;">
-    <img src="./img/React-Query.png" alt="React Query" height="120px">
-  </a>
-  <a href="https://tanstack.com/query/v4" target="_blank" style="border-radius: 8px; overflow: hidden;">
-    <img src="./img/TanStack-Query.png" alt="TanStack Query" height="120px">
-  </a>
-  <a href="https://react-icons.github.io/react-icons/" target="_blank" style="border-radius: 8px; overflow: hidden;">
-    <img src="./img/React-Icons.png" alt="React Icons" height="120px">
-  </a>
-  <a href="https://www.midjourney.com/" target="_blank" style="border-radius: 8px; overflow: hidden;">
-    <img src="./img/Midjourney.png" alt="Midjourney" height="120px">
-  </a>
-  <a href="https://react-hook-form.com/" target="_blank" style="border-radius: 8px; overflow: hidden;">
-    <img src="./img/React-Hook-Form.png" alt="React Hook Form" height="120px">
-  </a>
-</div>
+[![Vite](./img/Vite.png)](https://vitejs.dev/)
+[![ESLint](./img/ESLint.png)](https://eslint.org/)
+[![React](./img/React.png)](https://react.dev/)
+[![Styled Components](./img/Styled-Component.png)](https://styled-components.com/)
+[![React Router](./img/React-Router.png)](https://reactrouter.com/)
+[![Supabase](./img/Supabase.png)](https://supabase.com/)
+[![React Query](./img/React-Query.png)](https://tanstack.com/query/v4)
+[![TanStack Query](./img/TanStack-Query.png)](https://tanstack.com/query/v4)
+[![React Icons](./img/React-Icons.png)](https://react-icons.github.io/react-icons/)
+[![Midjourney](./img/Midjourney.png)](https://www.midjourney.com/)
+[![React Hook Form](./img/React-Hook-Form.png)](https://react-hook-form.com/)
 
 ---
 

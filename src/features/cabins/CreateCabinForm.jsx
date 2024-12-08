@@ -1,18 +1,17 @@
 /** @format */
 
 import { useForm } from "react-hook-form";
-
-import styled from "styled-components";
-
-import FormRow from "../../ui/FormRow";
-import Input from "../../ui/Input";
-import Form from "../../ui/Form";
-import Button from "../../ui/Button";
-import FileInput from "../../ui/FileInput";
-import Textarea from "../../ui/Textarea";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createCabin } from "../../services/apiCabins";
+
 import toast from "react-hot-toast";
+
+import Form from "../../ui/Form";
+import FormRow from "../../ui/FormRow";
+import Input from "../../ui/Input";
+import Textarea from "../../ui/Textarea";
+import Button from "../../ui/Button";
+import FileInput from "../../ui/FileInput";
 
 function CreateCabinForm() {
   const { register, handleSubmit, reset, getValues, formState } = useForm();
@@ -33,7 +32,7 @@ function CreateCabinForm() {
   });
 
   function onSubmit(data) {
-    mutate(data);
+    mutate({ ...data, image: data.image[0] });
   }
 
   function onError(errors) {
@@ -84,7 +83,7 @@ function CreateCabinForm() {
           {...register("discount", {
             required: "This field is requiered",
             validate: (value) =>
-              value <= getValues().regularPrice ||
+              Number(value) <= Number(getValues().regularPrice) ||
               "Discount should be lees than regular price",
           })}
         />
@@ -101,7 +100,11 @@ function CreateCabinForm() {
       </FormRow>
 
       <FormRow label="Cabin photo">
-        <FileInput id="image" accept="image/*" />
+        <FileInput
+          id="image"
+          accept="image/*"
+          {...register("image", { required: "This field is requiered" })}
+        />
       </FormRow>
 
       <FormRow>
