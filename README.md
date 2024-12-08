@@ -6,7 +6,7 @@
 
 Here are the main tools and frameworks employed in this project:
 
-<div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+<div style="display: flex; flex-wrap: wrap; gap: 15px 15px; justify-content: center;">
 
 <img src="./img/Vite.png" alt="Vite" height="150px">
 <img src="./img/ESLint.png" alt="ESLint" height="150px">
