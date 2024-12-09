@@ -4,19 +4,25 @@
 
 ## Technologies Used
 
-Here are the main tools and frameworks employed in this project:
+# Project Technologies
 
-[![Vite](./img/Vite.png)](https://vitejs.dev/)
-[![ESLint](./img/ESLint.png)](https://eslint.org/)
-[![React](./img/React.png)](https://react.dev/)
-[![Styled Components](./img/Styled-Component.png)](https://styled-components.com/)
-[![React Router](./img/React-Router.png)](https://reactrouter.com/)
-[![Supabase](./img/Supabase.png)](https://supabase.com/)
-[![React Query](./img/React-Query.png)](https://tanstack.com/query/v4)
-[![TanStack Query](./img/TanStack-Query.png)](https://tanstack.com/query/v4)
-[![React Icons](./img/React-Icons.png)](https://react-icons.github.io/react-icons/)
-[![Midjourney](./img/Midjourney.png)](https://www.midjourney.com/)
-[![React Hook Form](./img/React-Hook-Form.png)](https://react-hook-form.com/)
+This project utilizes the following technologies:
+
+<div align="center">
+
+<a href="https://vitejs.dev/"><img src="./img/Vite.png" alt="Vite" height="100px"></a>
+<a href="https://eslint.org/"><img src="./img/ESLint.png" alt="ESLint" height="100px"></a>
+<a href="https://react.dev/"><img src="./img/React.png" alt="React" height="100px"></a>
+<a href="https://styled-components.com/"><img src="./img/Styled-Component.png" alt="Styled Components" height="100px"></a>
+<a href="https://reactrouter.com/"><img src="./img/React-Router.png" alt="React Router" height="100px"></a>
+<a href="https://supabase.com/"><img src="./img/Supabase.png" alt="Supabase" height="100px"></a>
+<a href="https://tanstack.com/query/v4"><img src="./img/React-Query.png" alt="React Query" height="100px"></a>
+<a href="https://tanstack.com/query/v4"><img src="./img/TanStack-Query.png" alt="TanStack Query" height="100px"></a>
+<a href="https://react-icons.github.io/react-icons/"><img src="./img/React-Icons.png" alt="React Icons" height="100px"></a>
+<a href="https://www.midjourney.com/"><img src="./img/Midjourney.png" alt="Midjourney" height="100px"></a>
+<a href="https://react-hook-form.com/"><img src="./img/React-Hook-Form.png" alt="React Hook Form" height="100px"></a>
+
+</div>
 
 ---
 
