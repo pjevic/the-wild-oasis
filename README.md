@@ -6,19 +6,19 @@
 
 This project utilizes the following technologies:
 
-<div align="center">
+<div align="left">
 
-<a href="https://vitejs.dev/"><img src="./img/Vite.png" alt="Vite" height="80px"></a>
-<a href="https://eslint.org/"><img src="./img/ESLint.png" alt="ESLint" height="80px"></a>
-<a href="https://react.dev/"><img src="./img/React.png" alt="React" height="80px"></a>
-<a href="https://styled-components.com/"><img src="./img/Styled-Component.png" alt="Styled Components" height="80px"></a>
-<a href="https://reactrouter.com/"><img src="./img/React-Router.png" alt="React Router" height="80px"></a>
-<a href="https://supabase.com/"><img src="./img/Supabase.png" alt="Supabase" height="80px"></a>
-<a href="https://tanstack.com/query/v4"><img src="./img/React-Query.png" alt="React Query" height="80px"></a>
-<a href="https://tanstack.com/query/v4"><img src="./img/TanStack-Query.png" alt="TanStack Query" height="80px"></a>
-<a href="https://react-icons.github.io/react-icons/"><img src="./img/React-Icons.png" alt="React Icons" height="80px"></a>
-<a href="https://www.midjourney.com/"><img src="./img/Midjourney.png" alt="Midjourney" height="80px"></a>
-<a href="https://react-hook-form.com/"><img src="./img/React-Hook-Form.png" alt="React Hook Form" height="80px"></a>
+<a href="https://vitejs.dev/"><img src="./img/Vite.png" alt="Vite" height="60px"></a>
+<a href="https://eslint.org/"><img src="./img/ESLint.png" alt="ESLint" height="60px"></a>
+<a href="https://react.dev/"><img src="./img/React.png" alt="React" height="60px"></a>
+<a href="https://styled-components.com/"><img src="./img/Styled-Component.png" alt="Styled Components" height="60px"></a>
+<a href="https://reactrouter.com/"><img src="./img/React-Router.png" alt="React Router" height="60px"></a>
+<a href="https://supabase.com/"><img src="./img/Supabase.png" alt="Supabase" height="60px"></a>
+<a href="https://tanstack.com/query/v4"><img src="./img/React-Query.png" alt="React Query" height="60px"></a>
+<a href="https://tanstack.com/query/v4"><img src="./img/TanStack-Query.png" alt="TanStack Query" height="60px"></a>
+<a href="https://react-icons.github.io/react-icons/"><img src="./img/React-Icons.png" alt="React Icons" height="60px"></a>
+<a href="https://www.midjourney.com/"><img src="./img/Midjourney.png" alt="Midjourney" height="60px"></a>
+<a href="https://react-hook-form.com/"><img src="./img/React-Hook-Form.png" alt="React Hook Form" height="60px"></a>
 
 </div>
 
