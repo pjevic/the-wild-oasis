@@ -4,29 +4,27 @@
 
 ## Technologies Used
 
-# Project Technologies
-
 This project utilizes the following technologies:
 
 <div align="center">
 
-<a href="https://vitejs.dev/"><img src="./img/Vite.png" alt="Vite" height="100px"></a>
-<a href="https://eslint.org/"><img src="./img/ESLint.png" alt="ESLint" height="100px"></a>
-<a href="https://react.dev/"><img src="./img/React.png" alt="React" height="100px"></a>
-<a href="https://styled-components.com/"><img src="./img/Styled-Component.png" alt="Styled Components" height="100px"></a>
-<a href="https://reactrouter.com/"><img src="./img/React-Router.png" alt="React Router" height="100px"></a>
-<a href="https://supabase.com/"><img src="./img/Supabase.png" alt="Supabase" height="100px"></a>
-<a href="https://tanstack.com/query/v4"><img src="./img/React-Query.png" alt="React Query" height="100px"></a>
-<a href="https://tanstack.com/query/v4"><img src="./img/TanStack-Query.png" alt="TanStack Query" height="100px"></a>
-<a href="https://react-icons.github.io/react-icons/"><img src="./img/React-Icons.png" alt="React Icons" height="100px"></a>
-<a href="https://www.midjourney.com/"><img src="./img/Midjourney.png" alt="Midjourney" height="100px"></a>
-<a href="https://react-hook-form.com/"><img src="./img/React-Hook-Form.png" alt="React Hook Form" height="100px"></a>
+<a href="https://vitejs.dev/"><img src="./img/Vite.png" alt="Vite" height="80px"></a>
+<a href="https://eslint.org/"><img src="./img/ESLint.png" alt="ESLint" height="80px"></a>
+<a href="https://react.dev/"><img src="./img/React.png" alt="React" height="80px"></a>
+<a href="https://styled-components.com/"><img src="./img/Styled-Component.png" alt="Styled Components" height="80px"></a>
+<a href="https://reactrouter.com/"><img src="./img/React-Router.png" alt="React Router" height="80px"></a>
+<a href="https://supabase.com/"><img src="./img/Supabase.png" alt="Supabase" height="80px"></a>
+<a href="https://tanstack.com/query/v4"><img src="./img/React-Query.png" alt="React Query" height="80px"></a>
+<a href="https://tanstack.com/query/v4"><img src="./img/TanStack-Query.png" alt="TanStack Query" height="80px"></a>
+<a href="https://react-icons.github.io/react-icons/"><img src="./img/React-Icons.png" alt="React Icons" height="80px"></a>
+<a href="https://www.midjourney.com/"><img src="./img/Midjourney.png" alt="Midjourney" height="80px"></a>
+<a href="https://react-hook-form.com/"><img src="./img/React-Hook-Form.png" alt="React Hook Form" height="80px"></a>
 
 </div>
 
 ---
 
-## Why Supabase?
+### Why Supabase?
 
 - **Supabase** is an open-source alternative to Firebase, providing a robust backend as a service (BaaS). It simplifies backend development and offers features such as:
 
@@ -41,7 +39,7 @@ This project utilizes the following technologies:
 
 ---
 
-## Why React Query?
+### Why React Query?
 
 - **React Query** is a powerful library for managing remote (server) state, offering many features that simplify development and enhance user experience (UX):
   - **Data caching**: Automatically stores fetched data in a cache for quick access.
