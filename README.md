@@ -51,3 +51,41 @@ This project utilizes the following technologies:
 - React Query is essential because **remote state** (data fetched from a server) is fundamentally different from **UI state** (local component data). Managing these two types of state separately and efficiently improves app performance and maintainability.
 
 ---
+
+## Modal Window Using a React Portal
+
+The **React Portal** allows rendering a component outside of its parent DOM hierarchy while keeping it part of the React component tree. This is especially useful for components like modals, tooltips, or dropdowns that need to visually escape their parent DOM structure.
+
+Here’s an example of a `Modal` component implemented using React Portals:
+
+```jsx
+import { createPortal } from "react-dom";
+import { HiXMark } from "react-icons/hi";
+
+function Modal({ children, onClose }) {
+  return createPortal(
+    <Overlay>
+      <StyledModal>
+        <Button onClick={onClose}>
+          <HiXMark />
+        </Button>
+        <div>{children}</div>
+      </StyledModal>
+    </Overlay>,
+    document.body // The modal is rendered directly into the <body>
+  );
+}
+```
+
+---
+
+### Key Points to Remember
+
+- **Prevents Overflow Issues**:  
+  By rendering the modal into `document.body`, it avoids being affected by parent containers with CSS properties like `overflow: hidden` or `z-index`.
+
+- **Improved Accessibility**:  
+  Using portals ensures that modals are accessible and don’t interfere with the rest of the page’s structure.
+
+- **Reusable Design**:  
+  The `Modal` component can be reused across the app, ensuring a consistent and flexible design system.
