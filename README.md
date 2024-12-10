@@ -89,3 +89,116 @@ function Modal({ children, onClose }) {
 
 - **Reusable Design**:  
   The `Modal` component can be reused across the app, ensuring a consistent and flexible design system.
+
+# Modal Component - A Compound Component
+
+The `Modal` component is designed as a **compound component** to provide a flexible and declarative API. This approach encapsulates the functionality of opening and closing modal windows, enabling a clear separation of concerns while maintaining ease of use.
+
+---
+
+## Key Features
+
+### Compound Component Design
+
+The `Modal` component consists of the following sub-components:
+
+- **`<Modal.Open>`**: Manages the logic for opening specific modal windows.
+- **`<Modal.Window>`**: Represents the modal window, rendering its content when opened.
+
+### Context API
+
+- Leverages React's `createContext` and `useContext` to share state (`openName`) and functions (`open` and `close`) among the sub-components.
+- This ensures seamless communication and state management between the `Modal` components.
+
+### Portals
+
+- Modal content is rendered using `createPortal`, allowing it to appear outside the main DOM tree.
+- This enhances accessibility, styling flexibility, and ensures the modal is not affected by parent DOM elements.
+
+---
+
+## Using `cloneElement`
+
+The `cloneElement` function in React enables extending or modifying existing React elements by injecting props or altering their children dynamically.
+
+### How It Works
+
+In the `Modal` component, `cloneElement` is used to:
+
+- **Clone child components** (e.g., a button) inside `<Modal.Open>`.
+- Inject an `onClick` prop dynamically to trigger the `open` function, updating the state to display the modal window corresponding to the specified `name`.
+
+#### Example
+
+```jsx
+<Modal.Open opens="cabin-form">
+  <Button>Add new cabin</Button>
+</Modal.Open>
+```
+
+Here, the `Button` is cloned, and an `onClick` handler is added to it. When clicked, it invokes `open('cabin-form')`, which updates the state and opens the corresponding modal window.
+
+---
+
+## Implementation Overview
+
+Here’s a breakdown of the `Modal` component:
+
+### 1. Modal Context
+
+The context holds the current state (`openName`) and exposes the `open` and `close` functions:
+
+```jsx
+const ModalContext = createContext();
+
+function Modal({ children }) {
+  const [openName, setOpenName] = useState("");
+
+  const open = (openName) => setOpenName(openName);
+  const close = () => setOpenName("");
+
+  return (
+    <ModalContext.Provider value={{ openName, open, close }}>
+      {children}
+    </ModalContext.Provider>
+  );
+}
+```
+
+### 2. Open Sub-Component
+
+Clones its child and attaches an onClick handler:
+
+```jsx
+function Open({ children, opens: opensWindowName }) {
+  const { open } = useContext(ModalContext);
+
+  return cloneElement(children, { onClick: () => open(opensWindowName) });
+}
+```
+
+### 3. Window Sub-Component
+
+Uses the context to determine whether to render the modal window. When active, it renders the modal with a close button and its children:
+
+```jsx
+function Window({ children, name }) {
+  const { openName, close } = useContext(ModalContext);
+
+  if (name !== openName) return null;
+
+  return createPortal(
+    <Overlay>
+      <StyledModal>
+        <Button onClick={close}>
+          <HiXMark />
+        </Button>
+        <div>{cloneElement(children, { onCloseModal: close })}</div>
+      </StyledModal>
+    </Overlay>,
+    document.body
+  );
+}
+```
+
+---
