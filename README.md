@@ -90,6 +90,8 @@ function Modal({ children, onClose }) {
 - **Reusable Design**:  
   The `Modal` component can be reused across the app, ensuring a consistent and flexible design system.
 
+---
+
 # Modal Component - A Compound Component
 
 The `Modal` component is designed as a **compound component** to provide a flexible and declarative API. This approach encapsulates the functionality of opening and closing modal windows, enabling a clear separation of concerns while maintaining ease of use.
@@ -120,6 +122,10 @@ The `Modal` component consists of the following sub-components:
 ## Using `cloneElement`
 
 The `cloneElement` function in React enables extending or modifying existing React elements by injecting props or altering their children dynamically.
+
+```jsx
+const clonedElement = cloneElement(element, props, ...children);
+```
 
 ### How It Works
 
