@@ -10,6 +10,7 @@ import Table from "../../ui/Table";
 import CreateCabinForm from "./CreateCabinForm";
 import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
+import Menus from "../../ui/Menus";
 
 import styled from "styled-components";
 
@@ -75,33 +76,38 @@ function CabinRow({ cabin }) {
       ) : (
         <span>&mdash;</span>
       )}
+
       <div>
-        <button onClick={handleDuplicate} disabled={isCreating}>
-          <HiSquare2Stack />
-        </button>
-
         <Modal>
-          <Modal.Open opens="edit">
-            <button>
-              <HiPencil />
-            </button>
-          </Modal.Open>
-          <Modal.Window name="edit">
-            <CreateCabinForm cabinToEdit={cabin} />
-          </Modal.Window>
+          <Menus.Menu>
+            <Menus.Toggle id={cabinID} />
 
-          <Modal.Open opens="delete">
-            <button>
-              <HiTrash />
-            </button>
-          </Modal.Open>
-          <Modal.Window name="delete">
-            <ConfirmDelete
-              resourceName="cabin"
-              disabled={isDeleting}
-              onConfirm={() => deleteCabin(cabinID)}
-            />
-          </Modal.Window>
+            <Menus.List id={cabinID}>
+              <Menus.Button icon={<HiSquare2Stack />} onClick={handleDuplicate}>
+                Duplicate
+              </Menus.Button>
+
+              <Modal.Open opens="edit">
+                <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
+              </Modal.Open>
+
+              <Modal.Open opens="delete">
+                <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
+              </Modal.Open>
+            </Menus.List>
+
+            <Modal.Window name="edit">
+              <CreateCabinForm cabinToEdit={cabin} />
+            </Modal.Window>
+
+            <Modal.Window name="delete">
+              <ConfirmDelete
+                resourceName="cabin"
+                disabled={isDeleting}
+                onConfirm={() => deleteCabin(cabinID)}
+              />
+            </Modal.Window>
+          </Menus.Menu>
         </Modal>
       </div>
     </Table.Row>
