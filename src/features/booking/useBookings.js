@@ -4,14 +4,12 @@ import { useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
 import { getBookings } from "../../services/apiBooking";
-import SortBy from "../../ui/SortBy";
 
 export function useBookings() {
   const [searchParams] = useSearchParams();
 
   // FILTER:
   const filterValue = searchParams.get("status");
-
   const filter =
     !filterValue || filterValue === "all"
       ? null

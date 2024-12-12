@@ -1,10 +1,8 @@
 /** @format */
 
-// eq: equal, gte: equal and greter then, lte: less and equal then
+// eq: equal, gte: greter then, lte: less then
 
 import supabase from "./supabase";
-
-import { getToday } from "../utils/helpers";
 
 export async function getBookings({ filter, sortBy }) {
   let query = supabase
