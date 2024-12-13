@@ -1,6 +1,6 @@
 /** @format */
 
-import BookingDetail from "../features/booking/BookingDetail";
+import BookingDetail from "../features/bookings/BookingDetail";
 
 function Booking() {
   return <BookingDetail />;

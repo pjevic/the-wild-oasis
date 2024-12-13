@@ -1,13 +1,13 @@
 /** @format */
 
 import { useMoveBack } from "../../hooks/useMoveBack";
-import { useBooking } from "../booking/useBooking";
+import { useBooking } from "../bookings/useBooking";
 
 import Spinner from "../../ui/Spinner";
 import Row from "../../ui/Row";
 import Heading from "../../ui/Heading";
 import ButtonText from "../../ui/ButtonText";
-import BookingDataBox from "../../features/booking/BookingDataBox";
+import BookingDataBox from "../bookings/BookingDataBox";
 import ButtonGroup from "../../ui/ButtonGroup";
 import Button from "../../ui/Button";
 
