@@ -13,9 +13,8 @@ export function useLogin() {
   const { mutate: login, isLoading } = useMutation({
     mutationFn: ({ email, password }) => loginAPI({ email, password }),
     onSuccess: (user) => {
-      // Manuly set data to React Qury cash
       queryClient.setQueriesData(["user"], user);
-      navigate("/");
+      navigate("/dashboard", { replace: true });
     },
     onError: (err) => {
       console.log("ERROR", err);
