@@ -16,4 +16,4 @@ function useUser() {
   };
 }
 
-export default useUser;
+export { useUser };
