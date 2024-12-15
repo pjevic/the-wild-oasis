@@ -1,5 +1,9 @@
 /** @format */
 
+import { useRecentBookings } from "./useRecentBookings";
+import { useRecentStays } from "./useRecentStays";
+
+import Spinner from "../../ui/Spinner";
 import styled from "styled-components";
 
 const StyledDashboardLayout = styled.div`
@@ -10,6 +14,11 @@ const StyledDashboardLayout = styled.div`
 `;
 
 function DashboardLayout() {
+  const { bookings, isLoading: isLoading1 } = useRecentBookings();
+  const { stays, confirmedStays, isLoading: isLoading2 } = useRecentStays();
+
+  if (isLoading1 || isLoading2) return <Spinner />;
+
   return (
     <StyledDashboardLayout>
       <div>STATISTICS</div>

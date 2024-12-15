@@ -1,9 +1,12 @@
 /** @format */
 import { useState } from "react";
-import { isFuture, isPast, isToday } from "date-fns";
 import supabase from "../services/supabase";
-import Button from "../ui/Button";
+import { isFuture, isPast, isToday } from "date-fns";
+
 import { subtractDates } from "../utils/helpers";
+
+import Button from "../ui/Button";
+import Heading from "../ui/Heading";
 
 import { bookings } from "./data-bookings";
 import { cabins } from "./data-cabins";
@@ -115,7 +118,7 @@ function Uploader() {
     <div
       style={{
         marginTop: "auto",
-        backgroundColor: "#e0e7ff",
+        backgroundColor: "var(--color-indigo-100)",
         padding: "8px",
         borderRadius: "5px",
         textAlign: "center",
@@ -124,7 +127,7 @@ function Uploader() {
         gap: "8px",
       }}
     >
-      <h3>SAMPLE DATA</h3>
+      <Heading as="h3">SAMPLE DATA</Heading>
 
       <Button onClick={uploadAll} disabled={isLoading}>
         Upload ALL
