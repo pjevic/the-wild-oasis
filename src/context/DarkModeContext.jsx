@@ -3,7 +3,10 @@
 import { createContext, useContext, useEffect } from "react";
 import { useLocalStorageState } from "../hooks/useLocalStorageState";
 
-const DarkModeContext = createContext();
+const DarkModeContext = createContext({
+  isDarkMode: false,
+  toggleDarkMode: () => {},
+});
 
 function DarkModeProvider({ children }) {
   const [isDarkMode, setIsDarkMode] = useLocalStorageState(
@@ -11,18 +14,10 @@ function DarkModeProvider({ children }) {
     "isDarkMode"
   );
 
-  useEffect(
-    function () {
-      if (isDarkMode) {
-        document.documentElement.classList.add("dark-mode");
-        document.documentElement.classList.remove("light-mode");
-      } else {
-        document.documentElement.classList.add("light-mode");
-        document.documentElement.classList.remove("dark-mode");
-      }
-    },
-    [isDarkMode]
-  );
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark-mode", isDarkMode);
+    document.documentElement.classList.toggle("light-mode", !isDarkMode);
+  }, [isDarkMode]);
 
   function toggleDarkMode() {
     setIsDarkMode((isDark) => !isDark);
@@ -37,8 +32,11 @@ function DarkModeProvider({ children }) {
 
 function useDarkMode() {
   const context = useContext(DarkModeContext);
-  if (context === undefined)
-    throw new Error("DarkModeContext was used outside of DarkModeProvider");
+  if (context === undefined) {
+    throw new Error(
+      "`useDarkMode` must be used within a `DarkModeProvider`. Make sure to wrap your component tree in `DarkModeProvider`."
+    );
+  }
   return context;
 }
 
