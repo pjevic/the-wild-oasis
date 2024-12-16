@@ -1,5 +1,7 @@
 /** @format */
 
+import { lazy, Suspense } from "react";
+
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -7,20 +9,25 @@ import { Toaster } from "react-hot-toast";
 
 import { DarkModeProvider } from "./context/DarkModeContext";
 
-import AppLayout from "./ui/AppLayout";
-import Dashboard from "./pages/Dashboard";
-import Bookings from "./pages/Bookings";
-import Booking from "./pages/Booking";
-import Checkin from "./pages/Checkin";
-import Cabins from "./pages/Cabins";
-import Users from "./pages/Users";
-import Settings from "./pages/Settings";
-import Account from "./pages/Account";
-import Login from "./pages/Login";
-import PageNotFound from "./pages/PageNotFound";
-import ProtectedRoute from "./ui/ProtectedRoute";
+const AppLayout = lazy(() => import("./ui/AppLayout"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const Bookings = lazy(() => import("./pages/Bookings"));
+const Booking = lazy(() => import("./pages/Booking"));
+const Checkin = lazy(() => import("./pages/Checkin"));
+const Cabins = lazy(() => import("./pages/Cabins"));
+const Users = lazy(() => import("./pages/Users"));
+const Settings = lazy(() => import("./pages/Settings"));
+const Account = lazy(() => import("./pages/Account"));
+const Login = lazy(() => import("./pages/Login"));
+const PageNotFound = lazy(() => import("./pages/PageNotFound"));
+const ProtectedRoute = lazy(() => import("./ui/ProtectedRoute"));
 
 import GlobalStyles from "./styles/GlobalStyles";
+
+// ✓ 1415 modules transformed.
+// dist/index.html                    0.99 kB │ gzip:   0.53 kB
+// dist/assets/browser-7795914c.js    0.57 kB │ gzip:   0.40 kB
+// dist/assets/index-0066a653.js    895.00 kB │ gzip: 258.01 kB
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -38,28 +45,30 @@ function App() {
         <ReactQueryDevtools />
         <GlobalStyles />
         <BrowserRouter>
-          <Routes>
-            <Route
-              element={
-                <ProtectedRoute>
-                  <AppLayout />
-                </ProtectedRoute>
-              }
-            >
-              <Route index element={<Navigate replace to="dashboard" />} />
-              <Route path="dashboard" element={<Dashboard />} />
-              <Route path="bookings" element={<Bookings />} />
-              <Route path="bookings/:bookingID" element={<Booking />} />
-              <Route path="checkin/:bookingID" element={<Checkin />} />
-              <Route path="cabins" element={<Cabins />} />
-              <Route path="users" element={<Users />} />
-              <Route path="settings" element={<Settings />} />
-              <Route path="account" element={<Account />} />
-            </Route>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Routes>
+              <Route
+                element={
+                  <ProtectedRoute>
+                    <AppLayout />
+                  </ProtectedRoute>
+                }
+              >
+                <Route index element={<Navigate replace to="dashboard" />} />
+                <Route path="dashboard" element={<Dashboard />} />
+                <Route path="bookings" element={<Bookings />} />
+                <Route path="bookings/:bookingID" element={<Booking />} />
+                <Route path="checkin/:bookingID" element={<Checkin />} />
+                <Route path="cabins" element={<Cabins />} />
+                <Route path="users" element={<Users />} />
+                <Route path="settings" element={<Settings />} />
+                <Route path="account" element={<Account />} />
+              </Route>
 
-            <Route path="login" element={<Login />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
+              <Route path="login" element={<Login />} />
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+          </Suspense>
         </BrowserRouter>
 
         <Toaster
