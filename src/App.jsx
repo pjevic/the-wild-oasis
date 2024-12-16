@@ -19,15 +19,11 @@ const Users = lazy(() => import("./pages/Users"));
 const Settings = lazy(() => import("./pages/Settings"));
 const Account = lazy(() => import("./pages/Account"));
 const Login = lazy(() => import("./pages/Login"));
-const PageNotFound = lazy(() => import("./pages/PageNotFound"));
-const ProtectedRoute = lazy(() => import("./ui/ProtectedRoute"));
+
+import PageNotFound from "./pages/PageNotFound";
+import ProtectedRoute from "./ui/ProtectedRoute";
 
 import GlobalStyles from "./styles/GlobalStyles";
-
-// ✓ 1415 modules transformed.
-// dist/index.html                    0.99 kB │ gzip:   0.53 kB
-// dist/assets/browser-7795914c.js    0.57 kB │ gzip:   0.40 kB
-// dist/assets/index-0066a653.js    895.00 kB │ gzip: 258.01 kB
 
 const queryClient = new QueryClient({
   defaultOptions: {
