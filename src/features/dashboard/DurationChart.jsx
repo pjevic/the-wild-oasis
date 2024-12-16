@@ -2,7 +2,6 @@
 
 import { PieChart, ResponsiveContainer, Pie, Cell, Legend, Tooltip } from "recharts";
 import { useDarkMode } from "../../context/DarkModeContext";
-
 import Heading from "../../ui/Heading";
 import styled from "styled-components";
 
@@ -10,7 +9,6 @@ const ChartBox = styled.div`
   background-color: var(--color-gray-0);
   border: 1px solid var(--color-gray-100);
   border-radius: var(--border-radius-md);
-
   padding: 2.4rem 3.2rem;
   grid-column: 3 / span 2;
 
@@ -83,7 +81,30 @@ function DurationChart({ confirmedStays }) {
 
       <ResponsiveContainer width="100%" height={260}>
         <PieChart>
-          <Tooltip />
+          <Tooltip
+            content={({ active, payload }) => {
+              if (active && payload && payload.length > 0) {
+                const dataItem = payload[0]?.payload;
+                const { color, value } = dataItem || {};
+
+                return (
+                  <div
+                    style={{
+                      backgroundColor: color,
+                      padding: "8px",
+                      borderRadius: "4px",
+                      color: "#fff",
+                      textAlign: "center",
+                    }}
+                  >
+                    <p>{`${value} ${value === 1 ? "stay" : "stays"}`}</p>{" "}
+                  </div>
+                );
+              }
+              return null;
+            }}
+          />
+
           <Pie
             data={data}
             nameKey="duration"

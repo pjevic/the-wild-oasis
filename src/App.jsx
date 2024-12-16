@@ -1,14 +1,16 @@
 /** @format */
 
 import { lazy, Suspense } from "react";
-
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 
 import { DarkModeProvider } from "./context/DarkModeContext";
+import ProtectedRoute from "./ui/ProtectedRoute";
+import GlobalStyles from "./styles/GlobalStyles";
 
+// Lazy load components
 const AppLayout = lazy(() => import("./ui/AppLayout"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const Bookings = lazy(() => import("./pages/Bookings"));
@@ -19,17 +21,12 @@ const Users = lazy(() => import("./pages/Users"));
 const Settings = lazy(() => import("./pages/Settings"));
 const Account = lazy(() => import("./pages/Account"));
 const Login = lazy(() => import("./pages/Login"));
-
-import PageNotFound from "./pages/PageNotFound";
-import ProtectedRoute from "./ui/ProtectedRoute";
-
-import GlobalStyles from "./styles/GlobalStyles";
+const PageNotFound = lazy(() => import("./pages/PageNotFound"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      // staleTime: 60 * 1000,
-      staleTime: 0,
+      staleTime: 0, // Ensure data is re-fetched as needed
     },
   },
 });
@@ -60,7 +57,6 @@ function App() {
                 <Route path="settings" element={<Settings />} />
                 <Route path="account" element={<Account />} />
               </Route>
-
               <Route path="login" element={<Login />} />
               <Route path="*" element={<PageNotFound />} />
             </Routes>
