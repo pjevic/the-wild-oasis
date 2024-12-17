@@ -2,17 +2,21 @@
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import styled from "styled-components";
-
-import DatePickerWrapper from "../../ui/DatePickerWrapper";
 
 import Form from "../../ui/Form";
+import FormRow from "../../ui/FormRow";
+import Heading from "../../ui/Heading";
+import Input from "../../ui/Input";
 import Button from "../../ui/Button";
+import DatePickerWrapper from "../../ui/DatePickerWrapper";
+
+import styled from "styled-components";
 
 // Styled Components
-const FormRow = styled.div`
+const Row = styled.div`
   display: grid;
   align-items: center;
   grid-template-columns: 24rem 1fr 1.2fr;
@@ -38,25 +42,62 @@ const FormRow = styled.div`
   }
 `;
 
-const StyledSelect = styled.select`
-  border: 2px var(--color-brand-50);
-  padding: 8px;
-  border-radius: 4px;
-  font-size: 1rem;
-  outline: none;
-  color: #333;
+const StyledSelectWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
 
-  &:focus {
-    border-color: var(--color-brand-100);
+  margin-bottom: 2rem;
+
+  label {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--color-gray-800);
+    width: 15rem;
+  }
+
+  select {
+    background-color: var(--color-gray-50);
+    border: 1px solid var(--color-gray-300);
+    padding: 0.8rem;
+    border-radius: var(--border-radius-sm);
+    font-size: 1.3rem;
+    color: var(--color-gray-800);
+    transition: border-color 0.3s, box-shadow 0.3s;
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-brand-600);
+      box-shadow: var(--shadow-sm);
+    }
+
+    &:hover {
+      border-color: var(--color-brand-500);
+    }
+
+    &:disabled {
+      background-color: var(--color-gray-200);
+      color: var(--color-gray-500);
+      cursor: not-allowed;
+    }
+
+    option {
+      font-size: 1.4rem;
+      color: var(--color-gray-800);
+    }
+  }
+
+  p {
+    margin-top: 0.4rem;
+    font-size: 1.2rem;
+    color: var(--color-gray-600);
   }
 `;
 
-const StyledLabel = styled.label`
-  font-size: 1rem;
-  color: #555;
+const Box = styled.div`
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  gap: 4rem;
 `;
 
 // Utility to calculate max end date
@@ -90,6 +131,13 @@ function CreateBookingForm() {
   const [endDate, setEndDate] = useState(null);
   const [guestNum, setGuestNum] = useState("");
 
+  function handleCabinReset(e) {
+    e.preventDefault();
+    setStartDate(null);
+    setEndDate(null);
+    setGuestNum("");
+  }
+
   // Generate options for guest capacity
   const maxCapacity = 10;
   const guestOptions = Array.from({ length: maxCapacity }, (_, index) => index + 1);
@@ -97,6 +145,12 @@ function CreateBookingForm() {
   return (
     <Form>
       <FormRow>
+        <Heading as="h1">New booking</Heading>
+      </FormRow>
+      <FormRow>
+        <Heading as="h2">Cabin data</Heading>
+      </FormRow>
+      <Box>
         {/* Start Date */}
         <DateField
           label="Start Date"
@@ -106,7 +160,7 @@ function CreateBookingForm() {
             setEndDate(null); // Reset end date when start date changes
           }}
           minDate={new Date()}
-          placeholder="Select a start date"
+          placeholder="Select date"
         />
 
         {/* End Date */}
@@ -116,39 +170,56 @@ function CreateBookingForm() {
           onChange={(date) => setEndDate(date)}
           minDate={startDate}
           maxDate={calculateMaxEndDate(startDate)}
-          placeholder="Select an end date"
+          placeholder="Select date"
         />
 
-        {/* Guest Capacity */}
-        <StyledLabel>
-          Select Maximum Capacity:
-          <StyledSelect value={guestNum} onChange={(e) => setGuestNum(e.target.value)}>
-            <option value="" disabled>
-              -- Number of guests --
-            </option>
+        <StyledSelectWrapper>
+          <label htmlFor="numGuests">Guests</label>
+          <select
+            id="numGuests"
+            value={guestNum}
+            onChange={(e) => setGuestNum(e.target.value)}
+          >
+            <option> --- </option>
             {guestOptions.map((num) => (
               <option key={num} value={num}>
                 {num}
               </option>
             ))}
-          </StyledSelect>
-          {guestNum && <p>Selected Capacity: {guestNum}</p>}
-        </StyledLabel>
+          </select>
+        </StyledSelectWrapper>
+      </Box>
+
+      <Row>
+        <Button variation="secondary" onClick={handleCabinReset}>
+          Reset
+        </Button>
+        <Button>Check availability</Button>
+      </Row>
+
+      <FormRow>
+        <Heading as="h2">Guest data</Heading>
       </FormRow>
 
-      {/* Display Selected Information */}
-      {(startDate || endDate || guestNum) && (
-        <div>
-          {startDate && <p>Start Date: {startDate.toLocaleDateString("en-GB")}</p>}
-          {endDate && <p>End Date: {endDate.toLocaleDateString("en-GB")}</p>}
-          {guestNum && <p>Number of Guests: {guestNum}</p>}
-        </div>
-      )}
+      <FormRow label="Full name">
+        <Input type="text" id="fullName" />
+      </FormRow>
 
-      {/* Form Actions */}
+      <FormRow label="Email">
+        <Input type="email" id="email" />
+      </FormRow>
+
+      <FormRow label="Country">
+        <Input type="text" id="nationality" />
+      </FormRow>
+
+      <FormRow label="National ID">
+        <Input type="text" id="nationalID" />
+      </FormRow>
+
       <FormRow>
-        <Button variation="secondary">Cancel</Button>
-        <Button>Submit</Button>
+        <Button variation="secondary">Reset</Button>
+        <Button>Add new booking</Button>
       </FormRow>
     </Form>
   );
