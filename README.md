@@ -1,5 +1,15 @@
 <!-- @format -->
 
+To test the app, one might use the following credentials:
+
+Email: sipoma1680@owube.com
+
+Password: 123456789
+
+New users can only sign up from within the app, which aligns with its core purpose. If a new user is signed up, the email must be confirmed to log in.
+
+---
+
 # The Wild Oasis
 
 ## Technologies Used
