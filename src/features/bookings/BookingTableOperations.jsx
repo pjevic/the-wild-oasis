@@ -1,8 +1,10 @@
 /** @format */
 
-import SortBy from "../../ui/SortBy";
-import Filter from "../../ui/Filter";
 import TableOperations from "../../ui/TableOperations";
+import Button from "../../ui/Button";
+import Filter from "../../ui/Filter";
+import SortBy from "../../ui/SortBy";
+import AddBooking from "../bookings/AddBooking";
 
 function BookingTableOperations() {
   return (
@@ -28,6 +30,7 @@ function BookingTableOperations() {
           { value: "totalPrice-asc", label: "Sort by amount (low first)" },
         ]}
       />
+      <AddBooking />
     </TableOperations>
   );
 }

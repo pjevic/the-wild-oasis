@@ -40,7 +40,7 @@ function TodayItem({ activity }) {
       <div>{numNights} nights</div>
 
       {status === "unconfirmed" && (
-        <Button size="small" variation="primary" as={Link} to={`/checkin/${id}`}>
+        <Button size="small" as={Link} to={`/checkin/${id}`}>
           Check in
         </Button>
       )}
