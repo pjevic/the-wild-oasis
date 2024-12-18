@@ -134,3 +134,33 @@ export async function getTodaysActivities() {
   }
   return data;
 }
+
+export async function getAvailableCabins(startDate, endDate) {
+  const { data: bookedCabins, error } = await supabase
+    .from("bookings")
+    .select("cabinID, status")
+    .lte("startDate", endDate)
+    .neq("status", "checked-out");
+
+  if (error) {
+    console.error(error);
+    throw new Error("Available cabins could not be fetched");
+  }
+
+  const bookedCabinIDs = bookedCabins.map((item) => item.cabinID);
+
+  // Get all cabin IDs from the "cabins" table
+  const { data: allCabins, error: allCabinsError } = await supabase
+    .from("cabins")
+    .select("id");
+
+  if (allCabinsError) {
+    console.error(allCabinsError);
+    throw new Error("Could not fetch all cabin IDs");
+  }
+
+  // Filter out cabins that have bookings in the given date range
+  const data = allCabins.filter((cabin) => !bookedCabinIDs.includes(cabin.id));
+
+  return data; // Returns
+}

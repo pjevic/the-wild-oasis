@@ -2,6 +2,9 @@
 
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
+
+import { useCabins } from "../cabins/useCabins";
+import { useSettings } from "../settings/useSettings";
 import { calculateMaxEndDate } from "../../utils/helpers";
 
 import Form from "../../ui/Form";
@@ -10,8 +13,6 @@ import Heading from "../../ui/Heading";
 import Button from "../../ui/Button";
 import CustomDatePicker from "../../ui/CustomDatePicker";
 import CustomSelect from "../../ui/CustomSelect";
-import { useSettings } from "../settings/useSettings";
-import { useCabins } from "../cabins/useCabins";
 
 const Box = styled.div`
   width: 100%;
@@ -19,7 +20,7 @@ const Box = styled.div`
   gap: 4rem;
 `;
 
-function FormCabinAvailability() {
+function FormCabinAvailability({ setStartDate, setEndDate }) {
   const {
     register,
     handleSubmit,
@@ -46,10 +47,8 @@ function FormCabinAvailability() {
   const endDate = watch("endDate");
 
   const onSubmit = (data) => {
-    console.log("Form Data:", data);
-    console.log(data.startDate);
-    console.log(data.startDate.toISOString());
-    // Perform actions with the form data
+    setStartDate(data.startDate.toISOString());
+    setEndDate(data.endDate.toISOString());
   };
 
   const handleCabinReset = () => {

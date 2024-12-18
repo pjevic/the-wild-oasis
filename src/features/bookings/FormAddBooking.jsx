@@ -6,7 +6,7 @@ import Heading from "../../ui/Heading";
 import Input from "../../ui/Input";
 import Button from "../../ui/Button";
 
-function FormAddBooking() {
+function FormAddBooking({ availableCabins }) {
   return (
     <Form>
       <FormRow>
