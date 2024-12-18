@@ -1,8 +1,7 @@
 /** @format */
 
-import { useState } from "react";
+import { useForm } from "react-hook-form";
 import styled from "styled-components";
-
 import { calculateMaxEndDate } from "../../utils/helpers";
 
 import Form from "../../ui/Form";
@@ -11,6 +10,8 @@ import Heading from "../../ui/Heading";
 import Button from "../../ui/Button";
 import CustomDatePicker from "../../ui/CustomDatePicker";
 import CustomSelect from "../../ui/CustomSelect";
+import { useSettings } from "../settings/useSettings";
+import { useCabins } from "../cabins/useCabins";
 
 const Box = styled.div`
   width: 100%;
@@ -19,23 +20,44 @@ const Box = styled.div`
 `;
 
 function FormCabinAvailability() {
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
-  const [guestNum, setGuestNum] = useState("");
+  const {
+    register,
+    handleSubmit,
+    reset,
+    watch,
+    setValue,
+    formState: { errors },
+  } = useForm();
 
-  function handleCabinReset(e) {
-    e.preventDefault();
-    setStartDate(null);
-    setEndDate(null);
-    setGuestNum("");
-  }
+  const { cabins } = useCabins();
+  const { settings } = useSettings();
 
-  // Generate options for guest capacity
-  const maxCapacity = 10;
+  const maxBookingLength = settings?.maxBookingLength;
+
+  let maxCapacity = -Infinity;
+  cabins?.forEach((cabin) => {
+    if (cabin.maxCapacity > maxCapacity) {
+      maxCapacity = cabin.maxCapacity;
+    }
+  });
   const guestOptions = Array.from({ length: maxCapacity }, (_, index) => index + 1);
 
+  const startDate = watch("startDate");
+  const endDate = watch("endDate");
+
+  const onSubmit = (data) => {
+    console.log("Form Data:", data);
+    console.log(data.startDate);
+    console.log(data.startDate.toISOString());
+    // Perform actions with the form data
+  };
+
+  const handleCabinReset = () => {
+    reset(); // Resets all form values
+  };
+
   return (
-    <Form>
+    <Form onSubmit={handleSubmit(onSubmit)}>
       <FormRow>
         <Heading as="h1">New booking</Heading>
       </FormRow>
@@ -47,38 +69,45 @@ function FormCabinAvailability() {
         <CustomDatePicker
           label="Start Date"
           selected={startDate}
+          {...register("startDate", { required: "Start Date is required" })}
           onChange={(date) => {
-            setStartDate(date);
-            setEndDate(null);
+            setValue("startDate", date, { shouldValidate: true });
+            setValue("endDate", null);
           }}
           minDate={new Date()}
-          placeholder="Select date"
+          placeholder="Select start date"
         />
+        {errors.startDate && <p>{errors.startDate.message}</p>}
 
         {/* End Date */}
         <CustomDatePicker
           label="End Date"
           selected={endDate}
-          onChange={(date) => setEndDate(date)}
-          minDate={startDate}
-          maxDate={calculateMaxEndDate(startDate)}
-          placeholder="Select date"
+          {...register("endDate", { required: "End Date is required" })}
+          onChange={(date) => setValue("endDate", date, { shouldValidate: true })}
+          minDate={startDate ? new Date(startDate) : new Date()}
+          maxDate={startDate ? calculateMaxEndDate(startDate, maxBookingLength) : null}
+          placeholder="Select end date"
         />
+        {errors.endDate && <p>{errors.endDate.message}</p>}
 
         {/* Guests */}
         <CustomSelect
           label="Guests"
           id="numGuests"
-          value={guestNum}
+          value={watch("numGuests")}
           options={guestOptions}
-          onChange={(e) => setGuestNum(e.target.value)}
+          onChange={(e) =>
+            setValue("numGuests", e.target.value, { shouldValidate: true })
+          }
         />
+        {errors.numGuests && <p>{errors.numGuests.message}</p>}
       </Box>
       <FormRow>
-        <Button variation="secondary" onClick={handleCabinReset}>
+        <Button variation="secondary" type="reset" onClick={handleCabinReset}>
           Reset
         </Button>
-        <Button>Check availability</Button>
+        <Button type="submit">Check availability</Button>
       </FormRow>
     </Form>
   );

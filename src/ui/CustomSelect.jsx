@@ -1,6 +1,6 @@
 /** @format */
 
-import React from "react";
+import { forwardRef } from "react";
 import styled from "styled-components";
 
 const StyledSelectWrapper = styled.div`
@@ -55,11 +55,11 @@ const StyledSelectWrapper = styled.div`
   }
 `;
 
-function CustomSelect({ label, id, value, options, onChange }) {
+const CustomSelect = forwardRef(({ label, id, value, options, onChange }, ref) => {
   return (
     <StyledSelectWrapper>
       <label htmlFor={id}>{label}</label>
-      <select id={id} value={value} onChange={onChange}>
+      <select ref={ref} id={id} value={value} onChange={onChange}>
         <option value=""> --- </option>
         {options.map((optionValue) => (
           <option key={optionValue} value={optionValue}>
@@ -69,6 +69,8 @@ function CustomSelect({ label, id, value, options, onChange }) {
       </select>
     </StyledSelectWrapper>
   );
-}
+});
+
+CustomSelect.displayName = "CustomSelect";
 
 export default CustomSelect;

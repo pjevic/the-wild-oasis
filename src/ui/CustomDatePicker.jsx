@@ -1,5 +1,6 @@
 /** @format */
 
+import React, { forwardRef } from "react";
 import styled from "styled-components";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -112,29 +113,28 @@ const StyledDatePicker = styled.div`
   }
 `;
 
-// CustomDatePicker Component
-function CustomDatePicker({
-  label,
-  selected,
-  onChange,
-  minDate,
-  maxDate,
-  placeholder,
-}) {
-  return (
-    <StyledDatePicker>
-      {label && <h2>{label}</h2>}
-      <DatePicker
-        selected={selected}
-        onChange={onChange}
-        dateFormat="dd-MM-yyyy"
-        placeholderText={placeholder}
-        isClearable
-        minDate={minDate}
-        maxDate={maxDate}
-      />
-    </StyledDatePicker>
-  );
-}
+// CustomDatePicker Component with forwardRef
+const CustomDatePicker = forwardRef(
+  ({ label, selected, onChange, minDate, maxDate, placeholder }, ref) => {
+    return (
+      <StyledDatePicker>
+        {label && <h2>{label}</h2>}
+        <DatePicker
+          selected={selected}
+          onChange={onChange}
+          dateFormat="dd-MM-yyyy"
+          placeholderText={placeholder}
+          isClearable
+          minDate={minDate}
+          maxDate={maxDate}
+          ref={ref} // Forward the ref to the DatePicker
+        />
+      </StyledDatePicker>
+    );
+  }
+);
+
+// Add display name for the component
+CustomDatePicker.displayName = "CustomDatePicker";
 
 export default CustomDatePicker;
