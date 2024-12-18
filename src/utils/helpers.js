@@ -28,3 +28,11 @@ export const getToday = function (options = {}) {
   else today.setUTCHours(0, 0, 0, 0);
   return today.toISOString();
 };
+
+// Utility to calculate max end date
+export const calculateMaxEndDate = (startDate, days = 90) => {
+  if (!startDate) return null;
+  const maxEndDate = new Date(startDate);
+  maxEndDate.setDate(startDate.getDate() + days);
+  return maxEndDate;
+};

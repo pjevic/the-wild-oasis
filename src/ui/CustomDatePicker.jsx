@@ -5,10 +5,9 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 // Styled wrapper for DatePicker
-const DatePickerWrapper = styled.div`
+const StyledDatePicker = styled.div`
   display: flex;
   flex-direction: column;
-
   align-items: flex-start;
 
   /* Title Styling */
@@ -113,4 +112,29 @@ const DatePickerWrapper = styled.div`
   }
 `;
 
-export default DatePickerWrapper;
+// CustomDatePicker Component
+function CustomDatePicker({
+  label,
+  selected,
+  onChange,
+  minDate,
+  maxDate,
+  placeholder,
+}) {
+  return (
+    <StyledDatePicker>
+      {label && <h2>{label}</h2>}
+      <DatePicker
+        selected={selected}
+        onChange={onChange}
+        dateFormat="dd-MM-yyyy"
+        placeholderText={placeholder}
+        isClearable
+        minDate={minDate}
+        maxDate={maxDate}
+      />
+    </StyledDatePicker>
+  );
+}
+
+export default CustomDatePicker;
