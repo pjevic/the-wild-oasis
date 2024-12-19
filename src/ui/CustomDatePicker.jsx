@@ -12,11 +12,11 @@ const StyledDatePicker = styled.div`
   align-items: flex-start;
 
   /* Title Styling */
-  h2 {
+  p {
     color: var(--color-gray-800);
-    font-size: 1.6rem;
-    font-weight: 600;
+    font-size: 1.4rem;
     margin-bottom: 0.8rem;
+    margin-top: 1rem;
   }
 
   /* Input field styling */
@@ -118,7 +118,7 @@ const CustomDatePicker = forwardRef(
   ({ label, selected, onChange, minDate, maxDate, placeholder }, ref) => {
     return (
       <StyledDatePicker>
-        {label && <h2>{label}</h2>}
+        {label && <p>{label}</p>}
         <DatePicker
           selected={selected}
           onChange={onChange}

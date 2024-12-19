@@ -65,11 +65,9 @@ function FormCabinAvailability({ setStartDate, setEndDate, setMaxCapacity }) {
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <FormRow>
-        <Heading as="h1">New booking</Heading>
+        <Heading as="h5">New booking</Heading>
       </FormRow>
-      <FormRow>
-        <Heading as="h2">Requierments</Heading>
-      </FormRow>
+
       <Box>
         {/* Start Date */}
         <CustomDatePicker

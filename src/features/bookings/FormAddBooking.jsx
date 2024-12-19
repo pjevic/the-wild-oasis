@@ -28,20 +28,12 @@ function FormAddBooking({ availableCabins, numNights }) {
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <FormRow>
-        <Heading as="h2">Cabin options</Heading>
-      </FormRow>
-
-      <FormRow>
         <DropDownSelect
           cabins={availableCabins}
           numNights={numNights}
           onSelect={handleCabinSelect}
           disabled={!availableCabins && !selectedCabin}
         />
-      </FormRow>
-
-      <FormRow>
-        <Heading as="h2">Guest data</Heading>
       </FormRow>
 
       <FormRow label="Full name">

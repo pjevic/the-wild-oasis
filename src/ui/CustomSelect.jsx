@@ -11,10 +11,11 @@ const StyledSelectWrapper = styled.div`
   margin-bottom: 2rem;
 
   label {
-    font-size: 1.6rem;
-    font-weight: 600;
+    font-size: 1.4rem;
+    font-weight: 400;
     color: var(--color-gray-800);
     width: 15rem;
+    margin-top: 1rem;
   }
 
   select {
