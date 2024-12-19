@@ -20,7 +20,7 @@ const Box = styled.div`
   gap: 4rem;
 `;
 
-function FormCabinAvailability({ setStartDate, setEndDate }) {
+function FormCabinAvailability({ setStartDate, setEndDate, setMaxCapacity }) {
   const {
     register,
     handleSubmit,
@@ -45,14 +45,21 @@ function FormCabinAvailability({ setStartDate, setEndDate }) {
 
   const startDate = watch("startDate");
   const endDate = watch("endDate");
+  const numGuests = watch("numGuests");
+
+  const isFormValid = startDate && endDate && numGuests;
 
   const onSubmit = (data) => {
-    setStartDate(data.startDate.toISOString());
-    setEndDate(data.endDate.toISOString());
+    setStartDate(data.startDate.toISOString().slice(0, -5));
+    setEndDate(data.endDate.toISOString().slice(0, -5));
+    setMaxCapacity(data.numGuests);
   };
 
   const handleCabinReset = () => {
-    reset(); // Resets all form values
+    setStartDate("");
+    setEndDate("");
+    setMaxCapacity(0);
+    reset();
   };
 
   return (
@@ -61,7 +68,7 @@ function FormCabinAvailability({ setStartDate, setEndDate }) {
         <Heading as="h1">New booking</Heading>
       </FormRow>
       <FormRow>
-        <Heading as="h2">Cabin data</Heading>
+        <Heading as="h2">Requierments</Heading>
       </FormRow>
       <Box>
         {/* Start Date */}
@@ -96,6 +103,7 @@ function FormCabinAvailability({ setStartDate, setEndDate }) {
           id="numGuests"
           value={watch("numGuests")}
           options={guestOptions}
+          {...register("numGuests", { required: "Number of guests is required" })}
           onChange={(e) =>
             setValue("numGuests", e.target.value, { shouldValidate: true })
           }
@@ -106,7 +114,9 @@ function FormCabinAvailability({ setStartDate, setEndDate }) {
         <Button variation="secondary" type="reset" onClick={handleCabinReset}>
           Reset
         </Button>
-        <Button type="submit">Check availability</Button>
+        <Button type="submit" disabled={!isFormValid}>
+          Check availability
+        </Button>
       </FormRow>
     </Form>
   );

@@ -135,7 +135,7 @@ export async function getTodaysActivities() {
   return data;
 }
 
-export async function getAvailableCabins(startDate, endDate) {
+export async function getAvailableCabins(startDate, endDate, maxCapacity) {
   const { data: bookedCabins, error } = await supabase
     .from("bookings")
     .select("cabinID, status")
@@ -152,7 +152,8 @@ export async function getAvailableCabins(startDate, endDate) {
   // Get all cabin IDs from the "cabins" table
   const { data: allCabins, error: allCabinsError } = await supabase
     .from("cabins")
-    .select("id");
+    .select("id, name, regularPrice, discount, maxCapacity, image")
+    .gte("maxCapacity", maxCapacity);
 
   if (allCabinsError) {
     console.error(allCabinsError);
