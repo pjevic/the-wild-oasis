@@ -7,6 +7,17 @@ import { PAGE_SIZE } from "../utils/constance";
 
 import { getToday } from "../utils/helpers";
 
+export async function createBooking(bookingData) {
+  const { data, error } = await supabase.from("bookings").insert([bookingData]);
+
+  if (error) {
+    console.error("Error creating a booking:", error.message);
+    return null;
+  }
+
+  return data;
+}
+
 export async function getBookings({ filter, sortBy, page }) {
   let query = supabase
     .from("bookings")
@@ -164,4 +175,19 @@ export async function getAvailableCabins(startDate, endDate, maxCapacity) {
   const data = allCabins.filter((cabin) => !bookedCabinIDs.includes(cabin.id));
 
   return data; // Returns
+}
+
+export async function getMostRecentlyCreatedBooking() {
+  const { data, error } = await supabase
+    .from("bookings")
+    .select("*")
+    .order("created_at", { ascending: false })
+    .limit(1);
+
+  if (error) {
+    console.error("Error fetching most recent booking:", error);
+    return null;
+  }
+
+  return data;
 }

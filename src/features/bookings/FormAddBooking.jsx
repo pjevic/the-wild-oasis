@@ -1,8 +1,12 @@
 /** @format */
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
+import { useNavigate } from "react-router-dom";
+
+import { useCreateGuest } from "../guests/useCreateGuest.js";
+import { useCreateBooking } from "./useCreateBooking.js";
 import { getFlagURL } from "../../utils/helpers.js";
 
 import Form from "../../ui/Form";
@@ -11,18 +15,21 @@ import Input from "../../ui/Input";
 import Button from "../../ui/Button";
 import DropDownSelect from "../../ui/DropDownSelect";
 
+import { getMostRecentlyCreatedGuest } from "../../services/apiGuests.js";
+import { getMostRecentlyCreatedBooking } from "../../services/apiBookings.js";
+
 function FormAddBooking({ availableCabins, startDate, endDate, numGuests, numNights }) {
+  const { createGuest } = useCreateGuest();
+  const { createBooking } = useCreateBooking();
+
   const [selectedCabin, setSelectedCabin] = useState(null);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
+
+  const navigate = useNavigate();
+
+  const { register, handleSubmit, reset } = useForm();
 
   const handleCabinSelect = (cabin) => {
     setSelectedCabin(cabin);
-    console.log(cabin);
   };
 
   const createNewGuestData = (data) => {
@@ -35,7 +42,7 @@ function FormAddBooking({ availableCabins, startDate, endDate, numGuests, numNig
     };
   };
 
-  const createNewBookingData = () => {
+  const createNewBookingData = (id) => {
     return {
       startDate,
       endDate,
@@ -45,29 +52,50 @@ function FormAddBooking({ availableCabins, startDate, endDate, numGuests, numNig
       extrasPrice: 0,
       totalPrice: (selectedCabin.regularPrice - selectedCabin.discount) * numNights,
       status: "unconfirmed",
-      hasBreakfasr: false,
+      hasBreakfast: false,
       isPaid: false,
       observations: "",
       cabinID: selectedCabin.id,
+      guestID: id,
     };
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const newGuestData = createNewGuestData(data);
-    const newBookingData = createNewBookingData();
-    console.log(newGuestData);
-    console.log(newBookingData);
+
+    try {
+      await createGuest(newGuestData);
+
+      // Fetch the most recently created guest
+      const mostRecentGuest = await getMostRecentlyCreatedGuest();
+      const id = mostRecentGuest.at(0).id;
+
+      const newBookingData = createNewBookingData(id);
+      await createBooking(newBookingData);
+
+      // Fetch the most recently created booking
+      const mostRecentBooking = await getMostRecentlyCreatedBooking();
+      const bookingID = mostRecentBooking.at(0).id;
+
+      navigate(`/bookings/${bookingID}`);
+    } catch (error) {
+      console.error("Error during submission:", error.message);
+    }
   };
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <FormRow>
-        <DropDownSelect
-          cabins={availableCabins}
-          numNights={numNights}
-          onSelect={handleCabinSelect}
-          disabled={!availableCabins && !selectedCabin}
-        />
+        {availableCabins.lenght === 0 ? (
+          <DropDownSelect
+            cabins={availableCabins}
+            numNights={numNights}
+            onSelect={handleCabinSelect}
+            disabled={!availableCabins && !selectedCabin}
+          />
+        ) : (
+          <p>No cabins available </p>
+        )}
       </FormRow>
 
       <FormRow label="Full name">

@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { forwardRef } from "react";
+import { forwardRef } from "react";
 import styled from "styled-components";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -100,6 +100,7 @@ const StyledDatePicker = styled.div`
     background-color: var(--color-gray-200);
     color: var(--color-gray-900);
     text-decoration: line-through;
+    cursor: not-allowed;
   }
 
   /* Hover states for various selectors */

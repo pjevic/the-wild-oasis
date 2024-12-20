@@ -57,9 +57,6 @@ function FormCabinAvailability({
     if (startDate && endDate) {
       const nights = subtractDates(endDate.toISOString(), startDate.toISOString());
       setNumNights(nights > 0 ? nights : 0);
-      console.log(startDate);
-      console.log(endDate);
-      console.log("numNights: ", nights);
     }
   }, [startDate, endDate, setNumNights]);
 
@@ -67,7 +64,6 @@ function FormCabinAvailability({
     if (numGuests) {
       setNumGuests(numGuests);
     }
-    console.log("numGests: ", numGuests);
   }, [numGuests, setNumGuests]);
 
   const onSubmit = (data) => {

@@ -10,13 +10,8 @@ function CreateBookingForm() {
   const [endDate, setEndDate] = useState("");
   const [numNights, setNumNights] = useState(0);
   const [maxCapacity, setMaxCapacity] = useState(1);
-  const [numGuests, setNumGuests] = useState(1); // Add state for numGuests
-
-  const { availableCabins, isLoadingAvailableCabins } = useAvailableCabins(
-    startDate,
-    endDate,
-    maxCapacity
-  );
+  const [numGuests, setNumGuests] = useState(1);
+  const { availableCabins } = useAvailableCabins(startDate, endDate, maxCapacity);
 
   return (
     <>
