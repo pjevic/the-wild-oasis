@@ -86,7 +86,7 @@ function FormAddBooking({ availableCabins, startDate, endDate, numGuests, numNig
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <FormRow>
-        {availableCabins.lenght === 0 ? (
+        {availableCabins?.lenght === 0 ? (
           <DropDownSelect
             cabins={availableCabins}
             numNights={numNights}
