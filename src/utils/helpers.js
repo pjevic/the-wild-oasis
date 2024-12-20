@@ -2,6 +2,7 @@
 
 import { formatDistance, parseISO } from "date-fns";
 import { differenceInDays } from "date-fns";
+import countries from "country-flag-emoji-json";
 
 export const formatCurrency = (value) =>
   new Intl.NumberFormat("en", { style: "currency", currency: "USD" }).format(value);
@@ -36,3 +37,10 @@ export const calculateMaxEndDate = (startDate, days = 90) => {
   maxEndDate.setDate(startDate.getDate() + days);
   return maxEndDate;
 };
+
+export function getFlagURL(countryName) {
+  const country = countries.find(
+    (c) => c.name.toLowerCase() === countryName.toLowerCase()
+  );
+  return country ? `https://flagcdn.com/${country.code.toLowerCase()}.svg` : null;
+}

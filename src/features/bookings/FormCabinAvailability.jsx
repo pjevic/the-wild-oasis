@@ -1,11 +1,11 @@
 /** @format */
-
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 
 import { useCabins } from "../cabins/useCabins";
 import { useSettings } from "../settings/useSettings";
-import { calculateMaxEndDate } from "../../utils/helpers";
+import { calculateMaxEndDate, subtractDates } from "../../utils/helpers";
 
 import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
@@ -20,7 +20,13 @@ const Box = styled.div`
   gap: 4rem;
 `;
 
-function FormCabinAvailability({ setStartDate, setEndDate, setMaxCapacity }) {
+function FormCabinAvailability({
+  setStartDate,
+  setEndDate,
+  setMaxCapacity,
+  setNumNights,
+  setNumGuests,
+}) {
   const {
     register,
     handleSubmit,
@@ -47,18 +53,36 @@ function FormCabinAvailability({ setStartDate, setEndDate, setMaxCapacity }) {
   const endDate = watch("endDate");
   const numGuests = watch("numGuests");
 
-  const isFormValid = startDate && endDate && numGuests;
+  useEffect(() => {
+    if (startDate && endDate) {
+      const nights = subtractDates(endDate.toISOString(), startDate.toISOString());
+      setNumNights(nights > 0 ? nights : 0);
+      console.log(startDate);
+      console.log(endDate);
+      console.log("numNights: ", nights);
+    }
+  }, [startDate, endDate, setNumNights]);
+
+  useEffect(() => {
+    if (numGuests) {
+      setNumGuests(numGuests);
+    }
+    console.log("numGests: ", numGuests);
+  }, [numGuests, setNumGuests]);
 
   const onSubmit = (data) => {
     setStartDate(data.startDate.toISOString().slice(0, -5));
     setEndDate(data.endDate.toISOString().slice(0, -5));
     setMaxCapacity(data.numGuests);
+    setNumGuests(data.numGuests);
   };
 
   const handleCabinReset = () => {
     setStartDate("");
     setEndDate("");
     setMaxCapacity(0);
+    setNumNights(0);
+    setNumGuests(0);
     reset();
   };
 
@@ -99,7 +123,7 @@ function FormCabinAvailability({ setStartDate, setEndDate, setMaxCapacity }) {
         <CustomSelect
           label="Guests"
           id="numGuests"
-          value={watch("numGuests")}
+          value={numGuests}
           options={guestOptions}
           {...register("numGuests", { required: "Number of guests is required" })}
           onChange={(e) =>
@@ -112,7 +136,7 @@ function FormCabinAvailability({ setStartDate, setEndDate, setMaxCapacity }) {
         <Button variation="secondary" type="reset" onClick={handleCabinReset}>
           Reset
         </Button>
-        <Button type="submit" disabled={!isFormValid}>
+        <Button type="submit" disabled={!startDate || !endDate || !numGuests}>
           Check availability
         </Button>
       </FormRow>

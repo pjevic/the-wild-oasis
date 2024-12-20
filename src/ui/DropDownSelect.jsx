@@ -104,8 +104,6 @@ function DropDownSelect({ cabins, numNights, onSelect, disabled }) {
     if (onSelect) onSelect(cabin);
   };
 
-  console.log(numNights);
-
   return (
     <DropDownWrapper>
       <DropDownButton onClick={toggleDropdown} disabled={disabled}>

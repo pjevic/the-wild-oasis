@@ -1,16 +1,17 @@
 /** @format */
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+
+import { getFlagURL } from "../../utils/helpers.js";
 
 import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
-import Heading from "../../ui/Heading";
 import Input from "../../ui/Input";
 import Button from "../../ui/Button";
 import DropDownSelect from "../../ui/DropDownSelect";
 
-function FormAddBooking({ availableCabins, numNights }) {
+function FormAddBooking({ availableCabins, startDate, endDate, numGuests, numNights }) {
   const [selectedCabin, setSelectedCabin] = useState(null);
   const {
     register,
@@ -21,9 +22,42 @@ function FormAddBooking({ availableCabins, numNights }) {
 
   const handleCabinSelect = (cabin) => {
     setSelectedCabin(cabin);
+    console.log(cabin);
   };
 
-  const onSubmit = (data) => {};
+  const createNewGuestData = (data) => {
+    return {
+      fullName: data.fullName,
+      email: data.email,
+      nationality: data.nationality,
+      nationalID: data.nationalID,
+      countryFlag: getFlagURL(data.nationality),
+    };
+  };
+
+  const createNewBookingData = () => {
+    return {
+      startDate,
+      endDate,
+      numNights,
+      numGuests,
+      cabinPrice: selectedCabin.regularPrice,
+      extrasPrice: 0,
+      totalPrice: (selectedCabin.regularPrice - selectedCabin.discount) * numNights,
+      status: "unconfirmed",
+      hasBreakfasr: false,
+      isPaid: false,
+      observations: "",
+      cabinID: selectedCabin.id,
+    };
+  };
+
+  const onSubmit = (data) => {
+    const newGuestData = createNewGuestData(data);
+    const newBookingData = createNewBookingData();
+    console.log(newGuestData);
+    console.log(newBookingData);
+  };
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
